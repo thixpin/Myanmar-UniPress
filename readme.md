@@ -60,7 +60,7 @@ e.g.
 
 
 ## Contribution
-Contributions are warmly welcome. It is only the collection source code of othere developer (I am only copy paste developer :trollface: . If you have better idea, please do contribution. 
+Contributions are warmly welcome. It is only the collection source code of othere developer (I am only copy paste developer :trollface:) . If you have better idea, please do contribution. 
 
 #
 Support
