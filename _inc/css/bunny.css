@@ -1,0 +1,18 @@
+@keyframes changecolorhover { 
+    to { 
+        border-left: 4px solid #FD1100; 
+    }
+} 
+
+._c_o_nvert_:hover{ 
+    animation-name: changecolorhover; 
+    animation-duration: 1s; 
+    animation-timing-function: linear; 
+    animation-iteration-count: infinite; 
+    animation-direction: alternate; 
+}
+
+._c_o_nvert_{ 
+    border-left: 4px solid #DDDFE2; 
+    padding-left: .6em; 
+}
