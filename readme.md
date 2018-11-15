@@ -10,9 +10,11 @@ Tested up to: 4.9.6
 
 Stable tag: 1.0.0
 
-License: MIT License
+License: GNU GENERAL PUBLIC LICENSE
 
 Myanmar UniPress will check myanmar content and convert to browser encoding if the content font is not equal to brower font and Myanmar UniPress will conver the zawgyi contents (posts, comments, pages) as unicode before save. 
+
+![Screenshot1](screenshot1.png "screenshot1")
 
 ## Description 
 
