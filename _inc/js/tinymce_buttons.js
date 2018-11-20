@@ -2,7 +2,7 @@ if (typeof Rabbit == 'undefined') {
     var head = document.head;
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = '../wp-content/plugins/myanmar-unipress/_inc/js/rabbit.js';
+    script.src = '//www.rabbit-converter.org/Rabbit/rabbit.js';
     head.appendChild(script);
 }
 

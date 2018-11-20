@@ -29,7 +29,7 @@ function unipress_actions( $links, $file ) {
 /********* Load javascript and css in eader ***********/
 function unipress_header(){
     if(!is_admin()){
-        echo "<script src='".plugin_dir_url( __FILE__ )."_inc/js/rabbit.js'></script>";
+        echo "<script src='y//www.rabbit-converter.org/Rabbit/rabbit.js'></script>";
         if(get_option('IndicateConverted') == 1){
             echo "<link rel='stylesheet' href='".plugin_dir_url( __FILE__ )."_inc/css/bunny.css'/>";
         }
@@ -95,8 +95,8 @@ function unipress_buttons() {
 }
  
 function unipress_add_buttons( $plugin_array ) {
-    $plugin_array['uni_to_zg'] = plugin_dir_url( __FILE__ ).'_inc/js/tinymce_buttons.js';
-    $plugin_array['zg_to_uni'] = plugin_dir_url( __FILE__ ).'_inc/js/tinymce_buttons.js';
+    $plugin_array['uni_to_zg'] = plugin_dir_url( __FILE__ ).'_inc/js/tinymce_buttons.js?v=1';
+    $plugin_array['zg_to_uni'] = plugin_dir_url( __FILE__ ).'_inc/js/tinymce_buttons.js?v=1';
     return $plugin_array;
 }
  
