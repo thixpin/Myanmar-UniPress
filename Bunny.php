@@ -9,6 +9,23 @@ class Bunny extends Rabbit {
     * @param  string $string
     * @return boolean
     */
+    public static function is_mmtext($string)
+    {
+        $mm_regex  =  "/[\x{1000}-\x{109f}]/u";
+
+        if(preg_match( $mm_regex , $string))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+    * Checking this string is unicode or zawgyi.
+    *
+    * @param  string $string
+    * @return boolean
+    */
     public static function is_zawgyi($string)
     {
         $zg_regex  =  "/"; 
@@ -137,7 +154,7 @@ class Bunny extends Rabbit {
         $string = mb_convert_encoding($string, 'UTF-8');
 
         $string = self::mm_pre_normalize($string);
-        if( self::is_zawgyi($string))
+        if( self::is_mmtext($string) && self::is_zawgyi($string))
         {
             $string = self::zg2uni($string);
             //$string .= "_zawgyi";   // Delete after debugging
