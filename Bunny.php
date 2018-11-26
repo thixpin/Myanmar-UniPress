@@ -11,13 +11,8 @@ class Bunny extends Rabbit {
     */
     public static function is_mmtext($string)
     {
-        $mm_regex  =  "/[\x{1000}-\x{109f}]/u";
-
-        if(preg_match( $mm_regex , $string))
-        {
-            return true;
-        }
-        return false;
+        $mm_regex  =  "/[\x{1000}-\x{1021}]/u";
+        return preg_match( $mm_regex , $string) ? true : false;
     }
 
     /**
