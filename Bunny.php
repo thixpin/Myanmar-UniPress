@@ -150,12 +150,20 @@ class Bunny extends Rabbit {
         $string = mb_convert_encoding($string, 'UTF-8');
 
         $string = self::mm_pre_normalize($string);
-        if( self::is_mmtext($string) && self::is_zawgyi($string))
+        $string = str_replace("<p>", "b_u_n_n_y<p>", $string);
+        $str_array = explode("b_u_n_n_y",$string);
+        $converted_array = array();
+        foreach ($str_array as $k => $v) 
         {
-            $string = self::zg2uni($string);
-            //$string .= "_zawgyi";   // Delete after debugging
+            if(self::is_mmtext($v) && self::is_zawgyi($v))
+            {
+                $v = self::zg2uni($v);
+            } 
+            $converted_array[] = self::mm_normalize($v);
         }
-        return self::mm_normalize($string);
+        $string = implode("",$converted_array);
+        
+        return  $string;
     }
 
 }
