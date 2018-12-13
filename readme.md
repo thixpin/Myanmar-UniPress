@@ -46,6 +46,10 @@ e.g.
 #
 ## Changelog 
 
+#### Version  1.1.0 
+- New option `Disable BunnyJs` for font embed. 
+- Split by paragraph before detect and convert for WP new editor.
+
 
 #### Version  1.0.0 
 - Detecting browser font and auto converting to display
@@ -56,7 +60,7 @@ e.g.
 #
 
 ## Todo
-- Please suggest me
+- Add converter buttons on default block of new wp editor 
 
 
 ## Contribution
