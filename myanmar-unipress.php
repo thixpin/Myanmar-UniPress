@@ -29,7 +29,7 @@ function unipress_actions( $links, $file ) {
 /********* Load javascript and css in eader ***********/
 function unipress_header(){
     if(!is_admin()){
-        echo "<script src='y//www.rabbit-converter.org/Rabbit/rabbit.js'></script>";
+        echo "<script src='//www.rabbit-converter.org/Rabbit/rabbit.js'></script>";
         if(get_option('IndicateConverted') == 1){
             echo "<link rel='stylesheet' href='".plugin_dir_url( __FILE__ )."_inc/css/bunny.css'/>";
         }
