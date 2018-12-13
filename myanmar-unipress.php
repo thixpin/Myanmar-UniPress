@@ -28,7 +28,7 @@ function unipress_actions( $links, $file ) {
 
 /********* Load javascript and css in eader ***********/
 function unipress_header(){
-    if(!is_admin()){
+    if(!is_admin() && get_option('BunnyDisabled') != 1){
         echo "<script src='//www.rabbit-converter.org/Rabbit/rabbit.js'></script>";
         if(get_option('IndicateConverted') == 1){
             echo "<link rel='stylesheet' href='".plugin_dir_url( __FILE__ )."_inc/css/bunny.css'/>";
@@ -38,7 +38,7 @@ function unipress_header(){
 
 /********* Load javascript in footer ***********/
 function unipress_footer(){
-    if(!is_admin()){
+    if(!is_admin()  && get_option('BunnyDisabled') != 1){
         echo "<script src='".plugin_dir_url( __FILE__ )."_inc/js/bunny.js'></script>";
 	}
 }
