@@ -119,6 +119,7 @@ class Bunny extends Rabbit {
         $text = str_replace("ိီ", "ီ", $text);
         $text = str_replace("ီိ", "ီ", $text);
         $text = str_replace("ီီ", "ီ", $text);
+        $text = str_replace("\xE2\x80\x8B","",$text);
         return $text;
     }
 
