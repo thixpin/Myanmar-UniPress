@@ -6,9 +6,9 @@ Myanmar UniPress
 
 Requires at least: 2.5
 
-Tested up to: 4.9.6
+Tested up to: 5.0.1
 
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 
 License: GNU GENERAL PUBLIC LICENSE
 
