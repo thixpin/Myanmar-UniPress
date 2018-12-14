@@ -14,6 +14,7 @@ function unipress_adminpage(){
 		if(isset($_POST['Submit'])){
 			update_option('IndicateConverted',$_POST['IndicateConverted']);
 			update_option('BunnyDisabled',$_POST['BunnyDisabled']);
+			update_option('ShareAsZawgyi',$_POST['ShareAsZawgyi']);
 		}
 		
 	}
@@ -22,6 +23,7 @@ function unipress_adminpage(){
 		//init
 		update_option('IndicateConverted',0);
 		update_option('BunnyDisabled',0);
+		update_option('ShareAsZawgyi',0);
 		update_option('unipress_init',1);
 	}
 ?>
@@ -56,6 +58,21 @@ function unipress_adminpage(){
 						 ?> name="IndicateConverted" id="IndicateConverted" group="IndicateConverted"/>
 
 						 ( It will Indicate the converted text by <b>BunnyJs</b> with the left border. )
+						 </p>
+
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">
+						Share As Zawgyi text
+					</th>
+					<td>
+						<p>
+						 <input type="checkbox" value="1"
+						 <?php if (get_option('ShareAsZawgyi') == '1') echo 'checked="checked"'; 
+						 ?> name="ShareAsZawgyi" id="ShareAsZawgyi" group="ShareAsZawgyi"/>
+
+						 ( Preview of post title and excerpt will be appear as <b>Zawgyi Font</b> on social media. )
 						 </p>
 
 					</td>

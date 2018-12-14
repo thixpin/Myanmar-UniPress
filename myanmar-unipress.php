@@ -28,6 +28,16 @@ function unipress_actions( $links, $file ) {
 
 /********* Load javascript and css in eader ***********/
 function unipress_header(){
+    
+    // Adding Zawgyi-Meta Tags for Facebook sharing.
+    if(!is_admin() && is_single() && get_option('ShareAsZawgyi') == 1){
+        $og_title =  Bunny::uni2zg(wp_get_document_title());
+        $og_description = get_post_field('post_content', get_the_ID());
+        $og_description = Bunny::uni2zg(wp_trim_words($og_description, 40 , ''));   
+        ?><meta property="og:title" content="<?php echo $og_title; ?>"><?php echo PHP_EOL; 
+        ?><meta property="og:description" content="<?php echo $og_description; ?>"> <?php echo PHP_EOL;
+    }
+
     if(!is_admin() && get_option('BunnyDisabled') != 1){
         ?><script src="//www.rabbit-converter.org/Rabbit/rabbit.js"></script> <?php  echo PHP_EOL;
         if(get_option('IndicateConverted') == 1){
