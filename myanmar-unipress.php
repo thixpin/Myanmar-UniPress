@@ -34,8 +34,8 @@ function unipress_header(){
         $og_title =  Bunny::uni2zg(wp_get_document_title());
         $og_description = get_post_field('post_content', get_the_ID());
         $og_description = Bunny::uni2zg(wp_trim_words($og_description, 40 , ''));   
-        ?><meta property="og:title" content="<?php echo $og_title; ?>"><?php echo PHP_EOL; 
-        ?><meta property="og:description" content="<?php echo $og_description; ?>"> <?php echo PHP_EOL;
+        ?><meta property="og:title" name="twitter:title" content="<?php echo $og_title; ?>"><?php echo PHP_EOL; 
+        ?><meta property="og:description" name="twitter:description" content="<?php echo $og_description; ?>"> <?php echo PHP_EOL;
     }
 
     if(!is_admin() && get_option('BunnyDisabled') != 1){
@@ -57,6 +57,8 @@ function unipress_footer(){
 function filter_post_data( $data , $postarr ) {
     $data['post_title']     = Bunny::edit_mmtext($data['post_title']);
     $data['post_content']   = Bunny::edit_mmtext($data['post_content']);
+    $data['post_excerpt']   = Bunny::edit_mmtext($data['post_excerpt']);
+    $data['post_name']      = Bunny::edit_mmtext($data['post_name']);
     return $data;
 }
 
@@ -129,4 +131,12 @@ add_filter('pre_comment_content', 'filter_comment_content');
 add_action( 'init', 'unipress_buttons' );
 add_filter('tiny_mce_before_init','unipress_add_editor_styles');
 
+// // define the edit_post_link callback 
+// function filter_edit_post_link( $link, $post_id, $text ) { 
+//     // make filter magic happen here... 
+//     return $link; 
+// }; 
+         
+// // add the filter 
+// add_filter( 'edit_post_link', 'filter_edit_post_link', 10, 3 );
 ?>
