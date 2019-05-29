@@ -39,7 +39,7 @@ function unipress_header(){
     }
 
     if(!is_admin() && get_option('BunnyDisabled') != 1){
-        ?><script src="//www.rabbit-converter.org/Rabbit/rabbit.js"></script> <?php  echo PHP_EOL;
+        ?><script src="<?php echo plugin_dir_url( __FILE__ ); ?>_inc/js/rabbit.js"></script> <?php  echo PHP_EOL;
         if(get_option('IndicateConverted') == 1){
             ?><link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>_inc/css/bunny.css"/><?php echo PHP_EOL;
         }
