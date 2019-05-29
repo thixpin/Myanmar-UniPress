@@ -1,6 +1,6 @@
 <?php
 
-if(is_admin()){
+if(is_admin() && current_user_can('update_plugins')){
     add_action('admin_menu', 'unipress_options');
 }
 
@@ -9,7 +9,7 @@ function unipress_options(){
 }
 
 function unipress_adminpage(){
-	if(isset($_POST)){
+	if(isset($_POST) && current_user_can('update_plugins')){
 
 		if(isset($_POST['Submit'])){
 			update_option('IndicateConverted',$_POST['IndicateConverted']);
