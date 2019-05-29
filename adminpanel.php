@@ -1,4 +1,5 @@
 <?php
+require_once( ABSPATH . '/wp-includes/pluggable.php' );
 
 if(is_admin() && current_user_can('update_plugins')){
     add_action('admin_menu', 'unipress_options');
