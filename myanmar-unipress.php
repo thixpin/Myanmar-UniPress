@@ -12,6 +12,8 @@ Version: 1.1.0
 Author URI: http://fb.me/thixpin
 */
 
+define( 'UNIP_VERSION', '1.2.0' );
+
 require 'Bunny.php';
 require 'adminpanel.php';
 
@@ -27,7 +29,7 @@ function unipress_actions( $links, $file ) {
 }
 
 /********* Load javascript and css in eader ***********/
-function unipress_header(){
+function unipress_enqueue_scripts(){
     
     // Adding Zawgyi-Meta Tags for Facebook sharing.
     if(!is_admin() && is_single() && get_option('ShareAsZawgyi') == 1){
@@ -38,19 +40,19 @@ function unipress_header(){
         ?><meta property="og:description" name="twitter:description" content="<?php echo $og_description; ?>"> <?php echo PHP_EOL;
     }
 
-    if(!is_admin() && get_option('BunnyDisabled') != 1){
-        ?><script src="<?php echo plugin_dir_url( __FILE__ ); ?>_inc/js/rabbit.js"></script> <?php  echo PHP_EOL;
-        if(get_option('IndicateConverted') == 1){
-            ?><link rel="stylesheet" href="<?php echo plugin_dir_url( __FILE__ ); ?>_inc/css/bunny.css"/><?php echo PHP_EOL;
-        }
-    }
-}
+    $a = plugin_dir_url( __FILE__ );
+    $v = UNIP_VERSION;
 
-/********* Load javascript in footer ***********/
-function unipress_footer(){
-    if(!is_admin()  && get_option('BunnyDisabled') != 1){
-        ?><script src="<?php echo plugin_dir_url( __FILE__ ); ?>_inc/js/bunny.js"></script><?php echo PHP_EOL;
-	}
+    if(!is_admin() && get_option('BunnyDisabled') != 1){
+
+        if(get_option('IndicateConverted') == 1){
+            wp_enqueue_style( 'bunny_css', $a . '_inc/css/bunny.css', array(), $v );
+        }
+        
+        wp_enqueue_script( 'rabbit', $a . '_inc/js/rabbit.js', array(), $v, false );
+        wp_enqueue_script( 'bunny', $a . '_inc/js/bunny.js', array(), $v, true );
+        
+    }
 }
 
 /********* Save post/page title and content as unicode ***********/
@@ -107,8 +109,9 @@ function unipress_buttons() {
 }
  
 function unipress_add_buttons( $plugin_array ) {
-    $plugin_array['uni_to_zg'] = plugin_dir_url( __FILE__ ).'_inc/js/tinymce_buttons.js?v=1';
-    $plugin_array['zg_to_uni'] = plugin_dir_url( __FILE__ ).'_inc/js/tinymce_buttons.js?v=1';
+    $v = UNIP_VERSION;
+    $plugin_array['uni_to_zg'] = plugin_dir_url( __FILE__ ).'_inc/js/tinymce_buttons.js?v='.$v;
+    $plugin_array['zg_to_uni'] = plugin_dir_url( __FILE__ ).'_inc/js/tinymce_buttons.js?v='.$v;
     return $plugin_array;
 }
  
@@ -119,8 +122,7 @@ function unipress_register_buttons( $buttons ) {
 }
 
 /********* load js for font detecting and converting ***********/
-add_action('wp_head', 'unipress_header');
-add_action('wp_footer','unipress_footer');
+add_action('wp_enqueue_scripts', 'unipress_enqueue_scripts');
 
 /********* Edit contents before save ***********/
 add_action('pre_get_posts','filter_search');
