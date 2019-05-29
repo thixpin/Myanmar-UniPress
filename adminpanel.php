@@ -12,9 +12,9 @@ function unipress_adminpage(){
 	if(isset($_POST) && current_user_can('update_plugins')){
 
 		if(isset($_POST['Submit'])){
-			update_option('IndicateConverted',$_POST['IndicateConverted']);
-			update_option('BunnyDisabled',$_POST['BunnyDisabled']);
-			update_option('ShareAsZawgyi',$_POST['ShareAsZawgyi']);
+			update_option('IndicateConverted',	(int)$_POST['IndicateConverted']);
+			update_option('BunnyDisabled',		(int)$_POST['BunnyDisabled']);
+			update_option('ShareAsZawgyi',		(int)$_POST['ShareAsZawgyi']);
 		}
 		
 	}
