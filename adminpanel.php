@@ -10,15 +10,6 @@ function unipress_options(){
 }
 
 function unipress_adminpage(){
-	if(isset($_POST) && current_user_can('update_plugins')){
-
-		if(isset($_POST['Submit'])){
-			update_option('IndicateConverted',	(int)$_POST['IndicateConverted']);
-			update_option('BunnyDisabled',		(int)$_POST['BunnyDisabled']);
-			update_option('ShareAsZawgyi',		(int)$_POST['ShareAsZawgyi']);
-		}
-		
-	}
 	
 	if (get_option('unipress_init') =="") {
 		//init
@@ -27,11 +18,26 @@ function unipress_adminpage(){
 		update_option('ShareAsZawgyi',0);
 		update_option('unipress_init',1);
 	}
+
+	if(	isset($_POST) 
+		&& isset($_POST['Submit'])
+		&& current_user_can('update_plugins') 
+		&& isset( $_POST['unipress_nonce_field'])
+		&& wp_verify_nonce( $_POST['unipress_nonce_field'], 'unipress_adminpage' )
+	){
+
+		update_option('IndicateConverted',	(int)$_POST['IndicateConverted']);
+		update_option('BunnyDisabled',		(int)$_POST['BunnyDisabled']);
+		update_option('ShareAsZawgyi',		(int)$_POST['ShareAsZawgyi']);
+	
+	}
+
 ?>
 	 <div class="wrap" style="font-size:13px;">
 
 			<div class="icon32" id="icon-options-general"><br/></div><h2>Settings for Myanmar UniPress</h2>
 			<form method="post" action="options-general.php?page=myanmar-unipress">
+			<?php wp_nonce_field( 'unipress_adminpage', 'unipress_nonce_field' ); ?>
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row">
