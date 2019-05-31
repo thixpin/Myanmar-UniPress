@@ -8,6 +8,7 @@ Myanmar UniPress
 [![WordPress Downloads](https://img.shields.io/wordpress/plugin/dt/myanmar-unipress.svg)](https://wordpress.org/plugins/myanmar-unipress/)
 [![WordPress Plugin Active Installs](https://img.shields.io/wordpress/plugin/installs/myanmar-unipress.svg)](https://wordpress.org/plugins/myanmar-unipress/)
 ![License](https://img.shields.io/github/license/thixpin/Myanmar-Unipress.svg)
+![Scrutinizer code quality (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/quality/g/thixpin/Myanmar-Unipress.svg)
 
 ### Tags: myanmar font, Myanmar3, Unicode, Zawgyi, Converter
 

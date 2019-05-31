@@ -168,10 +168,10 @@ function shouldIgnoreElement(node) {
  * http://userscripts-mirror.org/scripts/review/103745
  */
 function convert_Tree(parent) {
-    if (parent instanceof Node == false || parent instanceof SVGElement) {
+    if (parent instanceof Node === false || parent instanceof SVGElement) {
         return;
     }
-    if (parent.className != null && parent.classList.contains('_c_o_nvert_') == true) {
+    if (parent.className !== null && parent.classList.contains('_c_o_nvert_') === true) {
         //console.log("converted return");
         return;
     }
@@ -182,9 +182,9 @@ function convert_Tree(parent) {
         } else if (child.nodeType == Node.TEXT_NODE) {
             var text = child.textContent.replace(/[\u200b\uFFFD]/g, "");
             if (text && isMyanmarText(text) && isZawgyiTex(text) != zawgyiUser) {
-                if (shouldIgnoreElement(parent) == false) {
+                if (shouldIgnoreElement(parent) === false) {
                     child.textContent = autoConvert(text);
-                    if (parent.className == null || (parent.classList.contains('_c_o_nvert_') == false && parent.classList.contains('text_exposed_show') == false)) {
+                    if (parent.className === null || (parent.classList.contains('_c_o_nvert_') === false && parent.classList.contains('text_exposed_show') == false)) {
                         parent.classList.add('_c_o_nvert_');
                         // var parentElement = findParent(parent);
                         // if(isDuplicated(parentElement)===false){
