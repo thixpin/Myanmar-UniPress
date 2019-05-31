@@ -12,7 +12,7 @@ Version: 1.1.0
 Author URI: http://fb.me/thixpin
 */
 
-define( 'UNIP_VERSION', '1.2.0' );
+define( 'UNIP_VERSION', '1.1.0' );
 
 require 'Bunny.php';
 require 'adminpanel.php';
