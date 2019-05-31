@@ -13,7 +13,7 @@ This section describes how to install the plugin and get it working.
 
 e.g.
 
-1. Upload `myanmar-unipress` folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
+1. Rename trunk folder as `myanmar-unipress` and upload this folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Use the Settings->Myanmar UniPress screen to configure the MyanmarUnipress
 
