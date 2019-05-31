@@ -20,12 +20,12 @@ require 'adminpanel.php';
 /********* add action link in plugin list ***********/
 add_filter( 'plugin_action_links',   'unipress_actions', 10, 2 );
 function unipress_actions( $links, $file ) {
-	$this_plugin = plugin_basename(__FILE__);
-	if ( $file == $this_plugin ) {
-		$settings_link = '<a href="'. esc_url( admin_url( 'options-general.php?page=myanmar-unipress' ) ) .'">'. __( 'Configure', 'myanmar-unipress' ) .'</a>';
-		array_unshift( $links, $settings_link );
-	} 
-	return $links;
+    $this_plugin = plugin_basename(__FILE__);
+    if ( $file == $this_plugin ) {
+        $settings_link = '<a href="'. esc_url( admin_url( 'options-general.php?page=myanmar-unipress' ) ) .'">'. __( 'Configure', 'myanmar-unipress' ) .'</a>';
+        array_unshift( $links, $settings_link );
+    } 
+    return $links;
 }
 
 /********* Load javascript and css in eader ***********/
@@ -71,7 +71,7 @@ function filter_comment_content($content) {
 
 /********* Check and convert the search text to unicode ***********/
 function filter_search($query) {
-    if ( !is_admin() && $query->is_main_query() ) {
+    if (!is_admin() && $query->is_main_query()) {
         if ($query->is_search) {
             $query->query['s'] = Bunny::edit_mmtext($query->query['s']);
             $query->query_vars['s'] = Bunny::edit_mmtext($query->query_vars['s']);
@@ -80,15 +80,15 @@ function filter_search($query) {
 }
 
 /********* Registers an editor stylesheet ***********/
-function unipress_add_editor_styles( $mceInit ) {
+function unipress_add_editor_styles($mceInit) {
     //$styles  = 'body.mce-content-body { background-color: #' . get_theme_mod( 'background-color', '#FFF' ) . '}';
     $styles  = '#tinymce .column{ width: 48%; display: inline-block; vertical-align: top; margin-bottom: 10px; background: #F1F1F1; } ';
     $styles .= ' #tinymce .column:nth-of-type(2n+2) { margin-left: 4%; } ';
     $styles .= ' #tinymce .column img{ max-width: 100%; margin: 0; margin-bottom: 10px; }';
-    if ( isset( $mceInit['content_style'] ) ) {
-        $mceInit['content_style'] .= ' ' . $styles . ' ';
+    if (isset($mceInit['content_style'])) {
+        $mceInit['content_style'] .= ' '.$styles.' ';
     } else {
-        $mceInit['content_style'] = $styles . ' ';
+        $mceInit['content_style'] = $styles.' ';
     }
     return $mceInit;
 }
@@ -96,28 +96,28 @@ function unipress_add_editor_styles( $mceInit ) {
 
 /********* TinyMCE Buttons ***********/
 function unipress_buttons() {
-    if ( ! current_user_can( 'edit_posts' ) && ! current_user_can( 'edit_pages' ) ) {
+    if (!current_user_can('edit_posts') && !current_user_can('edit_pages')) {
         return;
     }
 
-    if ( get_user_option( 'rich_editing' ) !== 'true' ) {
+    if (get_user_option('rich_editing') !== 'true') {
         return;
     }
 
-    add_filter( 'mce_external_plugins', 'unipress_add_buttons' );
-    add_filter( 'mce_buttons', 'unipress_register_buttons' );
+    add_filter('mce_external_plugins', 'unipress_add_buttons');
+    add_filter('mce_buttons', 'unipress_register_buttons');
 }
  
-function unipress_add_buttons( $plugin_array ) {
+function unipress_add_buttons($plugin_array) {
     $v = UNIP_VERSION;
-    $plugin_array['uni_to_zg'] = plugin_dir_url( __FILE__ ).'_inc/js/tinymce_buttons.js?v='.$v;
-    $plugin_array['zg_to_uni'] = plugin_dir_url( __FILE__ ).'_inc/js/tinymce_buttons.js?v='.$v;
+    $plugin_array['uni_to_zg'] = plugin_dir_url(__FILE__).'_inc/js/tinymce_buttons.js?v='.$v;
+    $plugin_array['zg_to_uni'] = plugin_dir_url(__FILE__).'_inc/js/tinymce_buttons.js?v='.$v;
     return $plugin_array;
 }
  
-function unipress_register_buttons( $buttons ) {
-    array_push( $buttons, 'uni_to_zg' );
-    array_push( $buttons, 'zg_to_uni' );
+function unipress_register_buttons($buttons) {
+    array_push($buttons, 'uni_to_zg');
+    array_push($buttons, 'zg_to_uni');
     return $buttons;
 }
 
@@ -125,13 +125,13 @@ function unipress_register_buttons( $buttons ) {
 add_action('wp_enqueue_scripts', 'unipress_enqueue_scripts');
 
 /********* Edit contents before save ***********/
-add_action('pre_get_posts','filter_search');
-add_filter('wp_insert_post_data', 'filter_post_data' , '99', 2 );
+add_action('pre_get_posts', 'filter_search');
+add_filter('wp_insert_post_data', 'filter_post_data', '99', 2);
 add_filter('pre_comment_content', 'filter_comment_content');
 
 /********* Add converter buttons in text editor ***********/
-add_action( 'init', 'unipress_buttons' );
-add_filter('tiny_mce_before_init','unipress_add_editor_styles');
+add_action('init', 'unipress_buttons');
+add_filter('tiny_mce_before_init', 'unipress_add_editor_styles');
 
 // // define the edit_post_link callback 
 // function filter_edit_post_link( $link, $post_id, $text ) { 

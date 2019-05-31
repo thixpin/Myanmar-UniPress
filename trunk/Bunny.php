@@ -4,29 +4,29 @@ require 'Rabbit.php';
 class Bunny extends Rabbit {
     
     /**
-    * Checking this string is unicode or zawgyi.
-    *
-    * @param  string $string
-    * @return boolean
-    */
+     * Checking this string is unicode or zawgyi.
+     *
+     * @param  string $string
+     * @return boolean
+     */
     public static function is_mmtext($string)
     {
-        $mm_regex  =  "/[\x{1000}-\x{1021}]/u";
-        return preg_match( $mm_regex , $string) ? true : false;
+        $mm_regex = "/[\x{1000}-\x{1021}]/u";
+        return preg_match($mm_regex, $string) ? true : false;
     }
 
     /**
-    * Checking this string is unicode or zawgyi.
-    *
-    * @param  string $string
-    * @return boolean
-    */
+     * Checking this string is unicode or zawgyi.
+     *
+     * @param  string $string
+     * @return boolean
+     */
     public static function is_zawgyi($string)
     {
-        $zg_regex  =  "/"; 
+        $zg_regex  = "/"; 
 
         // e+medial ra
-        $zg_regex .=  "\x{1031}\x{103b}";
+        $zg_regex .= "\x{1031}\x{103b}";
         // beginning e or medial ra
         $zg_regex .= "|^\x{1031}|^\x{103b}";
         // independent vowel, dependent vowel, tone , medial ra wa ha (no ya
@@ -98,7 +98,7 @@ class Bunny extends Rabbit {
 
         foreach ($SplittedText as $key => $value) {           
   
-            if(preg_match( $zg_regex , $value))
+            if (preg_match($zg_regex, $value))
             {
                 return true;
             }
@@ -107,11 +107,11 @@ class Bunny extends Rabbit {
     }
 
     /**
-    * Nornalizing the input text.
-    *
-    * @param  string $text
-    * @return string
-    */
+     * Nornalizing the input text.
+     *
+     * @param  string $text
+     * @return string
+     */
     public static function mm_pre_normalize($text)
     {
         $text = str_replace("ုု", "ု", $text);
@@ -119,16 +119,16 @@ class Bunny extends Rabbit {
         $text = str_replace("ိီ", "ီ", $text);
         $text = str_replace("ီိ", "ီ", $text);
         $text = str_replace("ီီ", "ီ", $text);
-        $text = str_replace("\xE2\x80\x8B","",$text);
+        $text = str_replace("\xE2\x80\x8B", "", $text);
         return $text;
     }
 
     /**
-    * Nornalizing the unicode text.
-    *
-    * @param  string $uni
-    * @return string
-    */
+     * Nornalizing the unicode text.
+     *
+     * @param  string $uni
+     * @return string
+     */
     public static function mm_normalize($uni)
     {
         $uni = str_replace("ုု", "ု", $uni);
@@ -140,28 +140,28 @@ class Bunny extends Rabbit {
 
 
     /**
-    * Checking this string is unicode or zawgyi.
-    *
-    * @param  string $string
-    * @return string
-    */
+     * Checking this string is unicode or zawgyi.
+     *
+     * @param  string $string
+     * @return string
+     */
     public static function edit_mmtext($string)
     {
         $string = mb_convert_encoding($string, 'UTF-8');
 
         $string = self::mm_pre_normalize($string);
         $string = str_replace("<p>", "b_u_n_n_y<p>", $string);
-        $str_array = explode("b_u_n_n_y",$string);
+        $str_array = explode("b_u_n_n_y", $string);
         $converted_array = array();
         foreach ($str_array as $k => $v) 
         {
-            if(self::is_mmtext($v) && self::is_zawgyi($v))
+            if (self::is_mmtext($v) && self::is_zawgyi($v))
             {
                 $v = self::zg2uni($v);
             } 
             $converted_array[] = self::mm_normalize($v);
         }
-        $string = implode("",$converted_array);
+        $string = implode("", $converted_array);
         
         return  $string;
     }
