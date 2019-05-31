@@ -1,13 +1,25 @@
+Myanmar UniPress
+==============
 
+
+## Tags: myanmar font, Myanmar3, Unicode, Zawgyi, Converter
+
+Requires at least: 3.0.1
+
+Tested up to: 5.2.1
+
+Stable tag: 1.1.0
+
+License: GNU GENERAL PUBLIC LICENSE
 
 Myanmar UniPress will check myanmar content and convert to unicode before saving.
 
-== Description ==
+## Description
 
 Myanmar UniPress will check myanmar content and convert to browser encoding if the content font is not equal to brower font and Myanmar UniPress will conver the zawgyi contents (posts, comments, pages) as unicode before save. 
 
 
-== Installation ==
+## Installation
 
 This section describes how to install the plugin and get it working.
 
@@ -19,37 +31,38 @@ e.g.
 
 
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions 
 
 Nothing at the moment
 
 
 
 
-== Screenshots ==
+## Screenshots 
 
 1. Preview of ClassicText Editor with MyanmarUnipress
 ![Screenshot1](assets/screenshot-1.png "screenshot-1.png")
 
 
-== Changelog ==
 
-= 1.1 =
+## Changelog 
+
+### 1.1.0
 * Detecting browser font and auto converting to display
 * Detecting content type is Unicode or Zawgyi
 * Save all update/insert contents as Unicode
 * Converter buttons in text editor (Need to used classic editor).
 
-== Upgrade Notice ==
+## Upgrade Notice 
 
 Nothing at the moment
 
-== Todo ==
+## Todo 
 
 1. Add converter buttons on default block of new wp editor 
 
 
-== Contribution ==
+## Contribution 
 You can contribute this plugin on this  [repository (Myanmar-Unipress)](https://github.com/thixpin/Myanmar-UniPress)
 
 Contributions are warmly welcome. It is only the collection source code of othere developer (I am only copy paste developer :trollface:) . If you have better idea, please do contribution. 
@@ -57,12 +70,12 @@ Contributions are warmly welcome. It is only the collection source code of other
 
 
 
-== Support ==
+## Support 
 
 You can connect [me](http://fb.me/thixpin) to get support.
 
 
-== Credits ==
+## Credits 
 
 - [Rabbit Converter](https://github.com/Rabbit-Converter/) was used for Unicode<==>Zawgyi converting.
 
