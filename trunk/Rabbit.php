@@ -45,7 +45,7 @@ class Rabbit
      * @param string $string
      * @return string
      */
-    private static function parseline($string){
+    private static function parseline($string) {
         $string = str_replace(chr(10), "\\n", $string);
         $string = str_replace(chr(13), "\\n", $string);
         $string = str_replace("\f", "\\f", $string);

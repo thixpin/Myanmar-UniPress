@@ -6,38 +6,38 @@ if(is_admin() && current_user_can('update_plugins')){
 }
 
 function unipress_options(){
-	add_options_page('Myanmar UniPress', 'Myanmar UniPress', 'administrator', 'myanmar-unipress', 'unipress_adminpage');
+    add_options_page('Myanmar UniPress', 'Myanmar UniPress', 'administrator', 'myanmar-unipress', 'unipress_adminpage');
 }
 
 function unipress_adminpage(){
 	
-	if (get_option('unipress_init') =="") {
-		//init
-		update_option('IndicateConverted',0);
-		update_option('BunnyDisabled',0);
-		update_option('ShareAsZawgyi',0);
-		update_option('unipress_init',1);
-	}
+    if (get_option('unipress_init') =="") {
+        //init
+        update_option('IndicateConverted',0);
+        update_option('BunnyDisabled',0);
+        update_option('ShareAsZawgyi',0);
+        update_option('unipress_init',1);
+    }
 
-	if(	isset($_POST) 
-		&& isset($_POST['Submit'])
-		&& current_user_can('update_plugins') 
-		&& isset( $_POST['unipress_nonce_field'])
-		&& wp_verify_nonce( $_POST['unipress_nonce_field'], 'unipress_adminpage' )
-	){
+    if(	isset($_POST) 
+        && isset($_POST['Submit'])
+        && current_user_can('update_plugins') 
+        && isset( $_POST['unipress_nonce_field'])
+        && wp_verify_nonce( $_POST['unipress_nonce_field'], 'unipress_adminpage' )
+    ){
 
-		update_option('IndicateConverted',	(int)$_POST['IndicateConverted']);
-		update_option('BunnyDisabled',		(int)$_POST['BunnyDisabled']);
-		update_option('ShareAsZawgyi',		(int)$_POST['ShareAsZawgyi']);
+        update_option('IndicateConverted',	(int)$_POST['IndicateConverted']);
+        update_option('BunnyDisabled',		(int)$_POST['BunnyDisabled']);
+        update_option('ShareAsZawgyi',		(int)$_POST['ShareAsZawgyi']);
 	
-	}
+    }
 
 ?>
 	 <div class="wrap" style="font-size:13px;">
 
 			<div class="icon32" id="icon-options-general"><br/></div><h2>Settings for Myanmar UniPress</h2>
 			<form method="post" action="options-general.php?page=myanmar-unipress">
-			<?php wp_nonce_field( 'unipress_adminpage', 'unipress_nonce_field' ); ?>
+			<?php wp_nonce_field('unipress_adminpage', 'unipress_nonce_field'); ?>
 			<table class="form-table">
 				<tr valign="top">
 					<th scope="row">
@@ -47,7 +47,7 @@ function unipress_adminpage(){
 						<p>
 						 <input type="checkbox" value="1"
 						 <?php if (get_option('BunnyDisabled') == '1') echo 'checked="checked"'; 
-						 ?> name="BunnyDisabled" id="BunnyDisabled" group="BunnyDisabled"/>
+                            ?> name="BunnyDisabled" id="BunnyDisabled" group="BunnyDisabled"/>
 
 						 ( <b>BunnyJs</b> will convert the myanmar texts to your drowser default font. <br> 
 						 If you already embedded the myanmar unicode in your Css, you should disable <b>BunnyJs</b>. )
@@ -62,7 +62,7 @@ function unipress_adminpage(){
 						<p>
 						 <input type="checkbox" value="1"
 						 <?php if (get_option('IndicateConverted') == '1') echo 'checked="checked"'; 
-						 ?> name="IndicateConverted" id="IndicateConverted" group="IndicateConverted"/>
+                            ?> name="IndicateConverted" id="IndicateConverted" group="IndicateConverted"/>
 
 						 ( It will Indicate the converted text by <b>BunnyJs</b> with the left border. )
 						 </p>
@@ -77,7 +77,7 @@ function unipress_adminpage(){
 						<p>
 						 <input type="checkbox" value="1"
 						 <?php if (get_option('ShareAsZawgyi') == '1') echo 'checked="checked"'; 
-						 ?> name="ShareAsZawgyi" id="ShareAsZawgyi" group="ShareAsZawgyi"/>
+                            ?> name="ShareAsZawgyi" id="ShareAsZawgyi" group="ShareAsZawgyi"/>
 
 						 ( Preview of post title and excerpt will be appear as <b>Zawgyi Font</b> on social media. )
 						 </p>
