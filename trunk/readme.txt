@@ -43,6 +43,11 @@ Nothing at the moment
 
 == Changelog ==
 
+
+= 1.1.1 =
+* Update rabbit.js for better converting.
+
+
 = 1.1 =
 * Detecting browser font and auto converting to display
 * Detecting content type is Unicode or Zawgyi
