@@ -18,39 +18,39 @@ require 'Bunny.php';
 require 'adminpanel.php';
 
 /********* add action link in plugin list ***********/
-add_filter( 'plugin_action_links',   'unipress_actions', 10, 2 );
-function unipress_actions( $links, $file ) {
+add_filter('plugin_action_links', 'unipress_actions', 10, 2);
+function unipress_actions($links, $file) {
     $this_plugin = plugin_basename(__FILE__);
-    if ( $file == $this_plugin ) {
-        $settings_link = '<a href="'. esc_url( admin_url( 'options-general.php?page=myanmar-unipress' ) ) .'">'. __( 'Configure', 'myanmar-unipress' ) .'</a>';
-        array_unshift( $links, $settings_link );
+    if ($file == $this_plugin) {
+        $settings_link = '<a href="'.esc_url(admin_url('options-general.php?page=myanmar-unipress')).'">'.__('Configure', 'myanmar-unipress').'</a>';
+        array_unshift($links, $settings_link);
     } 
     return $links;
 }
 
 /********* Load javascript and css in eader ***********/
-function unipress_enqueue_scripts(){
+function unipress_enqueue_scripts() {
     
     // Adding Zawgyi-Meta Tags for Facebook sharing.
-    if(!is_admin() && is_single() && get_option('ShareAsZawgyi') == 1){
-        $og_title =  Bunny::uni2zg(wp_get_document_title());
+    if (!is_admin() && is_single() && get_option('ShareAsZawgyi') == 1) {
+        $og_title = Bunny::uni2zg(wp_get_document_title());
         $og_description = get_post_field('post_content', get_the_ID());
-        $og_description = Bunny::uni2zg(wp_trim_words($og_description, 40 , ''));   
+        $og_description = Bunny::uni2zg(wp_trim_words($og_description, 40, ''));   
         ?><meta property="og:title" name="twitter:title" content="<?php echo $og_title; ?>"><?php echo PHP_EOL; 
         ?><meta property="og:description" name="twitter:description" content="<?php echo $og_description; ?>"> <?php echo PHP_EOL;
     }
 
-    $a = plugin_dir_url( __FILE__ );
+    $a = plugin_dir_url(__FILE__);
     $v = UNIP_VERSION;
 
-    if(!is_admin() && get_option('BunnyDisabled') != 1){
+    if (!is_admin() && get_option('BunnyDisabled') != 1) {
 
-        if(get_option('IndicateConverted') == 1){
-            wp_enqueue_style( 'bunny_css', $a . '_inc/css/bunny.css', array(), $v );
+        if (get_option('IndicateConverted') == 1) {
+            wp_enqueue_style('bunny_css', $a.'_inc/css/bunny.css', array(), $v);
         }
         
-        wp_enqueue_script( 'rabbit', $a . '_inc/js/rabbit.js', array(), $v, false );
-        wp_enqueue_script( 'bunny', $a . '_inc/js/bunny.js', array(), $v, true );
+        wp_enqueue_script('rabbit', $a.'_inc/js/rabbit.js', array(), $v, false);
+        wp_enqueue_script('bunny', $a.'_inc/js/bunny.js', array(), $v, true);
         
     }
 }
