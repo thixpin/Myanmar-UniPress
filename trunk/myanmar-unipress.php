@@ -1,18 +1,18 @@
 <?php
 /**
  * @package myanmar-unipress
- * @version 1.1.1
+ * @version 1.2.1
  */
 /*
 Plugin Name: Myanmar UniPress
 Plugin URI: http://wordpress.org/extend/plugins/myanmar-unipress/
 Description: Myanmar UniPress will check myanmar content and convert to browser encoding if the content font is not equal to brower font. It use Parabaik Converter, Myanmar Font Tagger Script(by Ko Thant Thet Khin Zaw), ZGDetector of sanlinnaing (for content type checking) and the browser font detecting idea from Ko Ei maung. 
 Author: thixpin
-Version: 1.1.1
+Version: 1.2.1
 Author URI: http://fb.me/thixpin
 */
 
-define( 'UNIP_VERSION', '1.1.1' );
+define( 'UNIP_VERSION', '1.2.1' );
 
 require 'Bunny.php';
 require 'adminpanel.php';
@@ -57,10 +57,12 @@ function unipress_enqueue_scripts(){
 
 /********* Save post/page title and content as unicode ***********/
 function filter_post_data( $data , $postarr ) {
-    $data['post_title']     = Bunny::edit_mmtext($data['post_title']);
-    $data['post_content']   = Bunny::edit_mmtext($data['post_content']);
-    $data['post_excerpt']   = Bunny::edit_mmtext($data['post_excerpt']);
-    $data['post_name']      = Bunny::edit_mmtext($data['post_name']);
+    if(get_option('DisableConvert2Save') != 1){
+        $data['post_title']     = Bunny::edit_mmtext($data['post_title']);
+        $data['post_content']   = Bunny::edit_mmtext($data['post_content']);
+        $data['post_excerpt']   = Bunny::edit_mmtext($data['post_excerpt']);
+        $data['post_name']      = Bunny::edit_mmtext($data['post_name']);
+    }
     return $data;
 }
 

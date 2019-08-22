@@ -16,7 +16,7 @@ Requires at least: 3.0.1
 
 Tested up to: 5.2.1
 
-Stable tag: 1.1.1
+Stable tag: 1.2.1
 
 License: GNU GENERAL PUBLIC LICENSE
 
@@ -54,6 +54,13 @@ Nothing at the moment
 
 
 ## Changelog 
+
+### 1.2.1 
+* fix an error
+
+### 1.2.0
+* Add an option to disable the detection and converting the new post for Unicode Admins.
+
 
 ### 1.1.1
 * Update rabbit.js for better converting.

@@ -16,7 +16,8 @@ function unipress_adminpage(){
         update_option('IndicateConverted',0);
         update_option('BunnyDisabled',0);
         update_option('ShareAsZawgyi',0);
-        update_option('unipress_init',1);
+		update_option('unipress_init',1);
+		update_option('DisableConvert2Save',0);
     }
 
     if(	isset($_POST) 
@@ -28,7 +29,8 @@ function unipress_adminpage(){
 
         update_option('IndicateConverted',	(int)$_POST['IndicateConverted']);
         update_option('BunnyDisabled',		(int)$_POST['BunnyDisabled']);
-        update_option('ShareAsZawgyi',		(int)$_POST['ShareAsZawgyi']);
+		update_option('ShareAsZawgyi',		(int)$_POST['ShareAsZawgyi']);
+		update_option('DisableConvert2Save',		(int)$_POST['DisableConvert2Save']);
 	
     }
 
@@ -80,6 +82,21 @@ function unipress_adminpage(){
                             ?> name="ShareAsZawgyi" id="ShareAsZawgyi" group="ShareAsZawgyi"/>
 
 						 ( Preview of post title and excerpt will be appear as <b>Zawgyi Font</b> on social media. )
+						 </p>
+
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">
+						Disable Converter for Saving Post
+					</th>
+					<td>
+						<p>
+						 <input type="checkbox" value="1"
+						 <?php if (get_option('DisableConvert2Save') == '1') echo 'checked="checked"'; 
+                            ?> name="DisableConvert2Save" id="DisableConvert2Save" group="DisableConvert2Save"/>
+
+						Disable detection and converting the new post.  (Only for Unicode Admins)
 						 </p>
 
 					</td>
