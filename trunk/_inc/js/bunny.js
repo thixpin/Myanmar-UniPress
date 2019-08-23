@@ -201,10 +201,8 @@ function convert_Tree(parent) {
                 
                 child.textContent = Rabbit.zg2uni(text);
                 add_class(parent,'_c_o_nvert_');
-                add_class(parent,'aaaa');
                 if(zawgyiUser){
                     add_class(parent,'myan_mar_Font');
-                    add_class(parent,'1111');
                 } 
 
             } else if(mmText && !isZawgyiTex(text)) {
@@ -212,10 +210,8 @@ function convert_Tree(parent) {
                 if(!canRender){
                     child.textContent = Rabbit.uni2zg(text);
                     add_class(parent,'_c_o_nvert_');
-                    add_class(parent,'bbbb');
                 } else if(zawgyiUser) {
                     add_class(parent,'myan_mar_Font');
-                    add_class(parent,'cccc');
                 } 
 
             } 
