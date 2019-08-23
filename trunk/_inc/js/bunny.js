@@ -13,10 +13,11 @@
 'use strict';
 
 // Detecting the browser's unicode redering
-function mmFontWidth(t){
+function mmFontWidth(text,embedded){
     var e = document.createElement("div");
-    e.setAttribute("style", "position: absolute; top: -999;");
-    e.innerHTML = t ;
+    var style = embedded ? "position: absolute; top: -999; font-family: MyanmarFont !important;" : "position: absolute; top: -998;"
+    e.setAttribute("style", style);
+    e.innerHTML = text ;
     document.body.appendChild(e);
     var ew = e.clientWidth;
     e.parentNode.removeChild(e);
@@ -24,10 +25,14 @@ function mmFontWidth(t){
 }
 
 function isZawgyiBrowser(){
-    return (mmFontWidth("က္က") >= mmFontWidth("က") * 1.5 );
+    return (mmFontWidth("က္က",false) >= mmFontWidth("က",false) * 1.5 );
 }
+function isCanRender(){
+    return (mmFontWidth("က္က",true) <= mmFontWidth("က",true) * 1.5 );
+}
+var  zawgyiUser =  isZawgyiBrowser();
+var  canRender = isCanRender();
 
-var  zawgyiUser = isZawgyiBrowser();
 //  End of redering detecting 
 
 /* If converter result is not correct we need to normallize the some error. 
@@ -167,11 +172,19 @@ function shouldIgnoreElement(node) {
  * This part are from Myanmar Font Tagger scripts developed by Ko Thant Thet Khin Zaw
  * http://userscripts-mirror.org/scripts/review/103745
  */
+function add_class(parent, className) {
+    if (    parent.className === null || (   
+            parent.classList.contains(className) === false && 
+            parent.classList.contains('text_exposed_show') == false
+    )){
+        parent.classList.add(className);
+    }
+}
 function convert_Tree(parent) {
     if (parent instanceof Node === false || parent instanceof SVGElement) {
         return;
     }
-    if (parent.className !== null && parent.classList.contains('_c_o_nvert_') === true) {
+    if (parent.className != null && (parent.classList.contains('_c_o_nvert_') === true || parent.classList.contains('myan_mar_Font') === true)) {
         //console.log("converted return");
         return;
     }
@@ -180,19 +193,33 @@ function convert_Tree(parent) {
         if (child.nodeType != Node.TEXT_NODE && child.hasChildNodes()) {
             convert_Tree(child);
         } else if (child.nodeType == Node.TEXT_NODE) {
+            
             var text = child.textContent.replace(/[\u200b\uFFFD]/g, "");
-            if (text && isMyanmarText(text) && isZawgyiTex(text) != zawgyiUser) {
-                if (shouldIgnoreElement(parent) === false) {
-                    child.textContent = autoConvert(text);
-                    if (parent.className === null || (parent.classList.contains('_c_o_nvert_') === false && parent.classList.contains('text_exposed_show') == false)) {
-                        parent.classList.add('_c_o_nvert_');
-                        // var parentElement = findParent(parent);
-                        // if(isDuplicated(parentElement)===false){
-                        //     parentElement.classList.add("i_am_zawgyi");
-                        // }
-                    }
-                }
-            }
+            var mmText = (text && isMyanmarText(text)) ? true : false;
+
+            if( mmText && isZawgyiTex(text) && canRender) {
+                
+                child.textContent = Rabbit.zg2uni(text);
+                add_class(parent,'_c_o_nvert_');
+                add_class(parent,'aaaa');
+                if(zawgyiUser){
+                    add_class(parent,'myan_mar_Font');
+                    add_class(parent,'1111');
+                } 
+
+            } else if(mmText && !isZawgyiTex(text)) {
+
+                if(!canRender){
+                    child.textContent = Rabbit.uni2zg(text);
+                    add_class(parent,'_c_o_nvert_');
+                    add_class(parent,'bbbb');
+                } else if(zawgyiUser) {
+                    add_class(parent,'myan_mar_Font');
+                    add_class(parent,'cccc');
+                } 
+
+            } 
+            
         }
     }
 }

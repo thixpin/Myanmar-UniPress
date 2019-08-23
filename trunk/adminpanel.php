@@ -1,36 +1,47 @@
 <?php
-require_once(ABSPATH.'/wp-includes/pluggable.php');
+require_once( ABSPATH . '/wp-includes/pluggable.php' );
 
-if (is_admin() && current_user_can('update_plugins')) {
+if(is_admin() && current_user_can('update_plugins')){
     add_action('admin_menu', 'unipress_options');
 }
 
-function unipress_options() {
+function unipress_options(){
     add_options_page('Myanmar UniPress', 'Myanmar UniPress', 'administrator', 'myanmar-unipress', 'unipress_adminpage');
 }
 
-function unipress_adminpage() {
+function unipress_adminpage(){
 	
-    if (get_option('unipress_init') == "") {
+    if (get_option('unipress_init') =="") {
         //init
         update_option('IndicateConverted',0);
         update_option('BunnyDisabled',0);
         update_option('ShareAsZawgyi',0);
 		update_option('unipress_init',1);
 		update_option('DisableConvert2Save',0);
+		update_option('fontFamily',0);
     }
 
-    if (isset($_POST) 
+    if(	isset($_POST) 
         && isset($_POST['Submit'])
         && current_user_can('update_plugins') 
-        && isset($_POST['unipress_nonce_field'])
-        && wp_verify_nonce($_POST['unipress_nonce_field'], 'unipress_adminpage')
-    ) {
+        && isset( $_POST['unipress_nonce_field'])
+        && wp_verify_nonce( $_POST['unipress_nonce_field'], 'unipress_adminpage' )
+    ){
 
         update_option('IndicateConverted',	(int)$_POST['IndicateConverted']);
         update_option('BunnyDisabled',		(int)$_POST['BunnyDisabled']);
 		update_option('ShareAsZawgyi',		(int)$_POST['ShareAsZawgyi']);
-		update_option('DisableConvert2Save',		(int)$_POST['DisableConvert2Save']);
+		update_option('DisableConvert2Save',(int)$_POST['DisableConvert2Save']);
+
+		$fonts = array('pyidaungsu', 'myanmar3', 'mon3', 'notosan', 'padauk', 'masterpiece');
+		$fontFamily = $_POST['fontFamily'];
+		$font_index = array_search($fontFamily, $fonts);
+		if( $font_index > 0) {
+			$font = $fonts[$font_index];
+		} else {
+			$font = 'pyidaungsu';
+		}
+		update_option('fontFamily',			$font);
 	
     }
 
@@ -48,9 +59,7 @@ function unipress_adminpage() {
 					<td>
 						<p>
 						 <input type="checkbox" value="1"
-						 <?php if (get_option('BunnyDisabled') == '1') {
-    echo 'checked="checked"';
-}
+						 <?php if (get_option('BunnyDisabled') == '1') echo 'checked="checked"'; 
                             ?> name="BunnyDisabled" id="BunnyDisabled" group="BunnyDisabled"/>
 
 						 ( <b>BunnyJs</b> will convert the myanmar texts to your drowser default font. <br> 
@@ -65,9 +74,7 @@ function unipress_adminpage() {
 					<td>
 						<p>
 						 <input type="checkbox" value="1"
-						 <?php if (get_option('IndicateConverted') == '1') {
-    echo 'checked="checked"';
-}
+						 <?php if (get_option('IndicateConverted') == '1') echo 'checked="checked"'; 
                             ?> name="IndicateConverted" id="IndicateConverted" group="IndicateConverted"/>
 
 						 ( It will Indicate the converted text by <b>BunnyJs</b> with the left border. )
@@ -82,9 +89,7 @@ function unipress_adminpage() {
 					<td>
 						<p>
 						 <input type="checkbox" value="1"
-						 <?php if (get_option('ShareAsZawgyi') == '1') {
-    echo 'checked="checked"';
-}
+						 <?php if (get_option('ShareAsZawgyi') == '1') echo 'checked="checked"'; 
                             ?> name="ShareAsZawgyi" id="ShareAsZawgyi" group="ShareAsZawgyi"/>
 
 						 ( Preview of post title and excerpt will be appear as <b>Zawgyi Font</b> on social media. )
@@ -103,6 +108,26 @@ function unipress_adminpage() {
                             ?> name="DisableConvert2Save" id="DisableConvert2Save" group="DisableConvert2Save"/>
 
 						Disable detection and converting the new post.  (Only for Unicode Admins)
+						 </p>
+
+					</td>
+				</tr>
+				<tr valign="top">
+					<th scope="row">
+						Select Font
+					</th>
+					<td>
+						<p>
+						<select class="fontFamily" id="fontFamily" name="fontFamily" group="fontFamily">
+							<option <?php if(get_option('fontFamily') == 'pyidaungsu'){ echo 'selected="selected"'; } ?> value="pyidaungsu">Pyidaungsu</option>
+							<option <?php if(get_option('fontFamily') == 'myanmar3'){ echo 'selected="selected"'; } ?> value="myanmar3">Myanmar3</option>
+							<option <?php if(get_option('fontFamily') == 'mon3'){ echo 'selected="selected"'; } ?> value="mon3">MON3 Anonta 1</option>
+							<option <?php if(get_option('fontFamily') == 'notosan'){ echo 'selected="selected"'; } ?> value="notosan">Notosan Myanmar</option>
+							<option <?php if(get_option('fontFamily') == 'padauk'){ echo 'selected="selected"'; } ?> value="padauk">Padauk</option>
+							<option <?php if(get_option('fontFamily') == 'masterpiece'){ echo 'selected="selected"'; } ?> value="masterpiece">Masterpiece Uni Sans</option>
+						</select>
+
+						&nbsp; &nbsp; &nbsp; (Select a font to embedded in your site if browser support);
 						 </p>
 
 					</td>
