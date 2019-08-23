@@ -32,7 +32,7 @@ switch ($font) {
         $font_family="Notosan Myanmar";
     case 'pyidaungsu':
     default:
-        $font = 'pyidaungsu-2.1';
+        $font = 'pyidaungsu-1.8';
         $have_bold=true;
         $font_family="Pyidaungsu";
         break;
