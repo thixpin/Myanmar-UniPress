@@ -75,5 +75,5 @@ echo $css;
 ?>
 
 .myan_mar_Font{
-    font-family: MyanmarFont;
+    font-family: MyanmarFont !important;
 }
