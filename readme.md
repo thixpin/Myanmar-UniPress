@@ -14,9 +14,9 @@ Myanmar UniPress
 
 Requires at least: 3.0.1
 
-Tested up to: 5.2.1
+Tested up to: 5.2.2
 
-Stable tag: 1.2.1
+Stable tag: 1.3.0
 
 License: GNU GENERAL PUBLIC LICENSE
 
@@ -54,6 +54,9 @@ Nothing at the moment
 
 
 ## Changelog 
+
+### 1.3.0
+* Add new feature, Font Embedding (Pyidaung, Myanmar3, MON3 Anonta 1, Notosan Myanmar, Padauk, Masterpiece Uni Sans)
 
 ### 1.2.1 
 * fix an error
