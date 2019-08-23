@@ -18,7 +18,7 @@ function unipress_adminpage(){
         update_option('ShareAsZawgyi',0);
 		update_option('unipress_init',1);
 		update_option('DisableConvert2Save',0);
-		update_option('fontFamily',0);
+		update_option('fontFamily','mon3');
     }
 
     if(	isset($_POST) 
@@ -33,13 +33,13 @@ function unipress_adminpage(){
 		update_option('ShareAsZawgyi',		(int)$_POST['ShareAsZawgyi']);
 		update_option('DisableConvert2Save',(int)$_POST['DisableConvert2Save']);
 
-		$fonts = array('pyidaungsu', 'myanmar3', 'mon3', 'notosan', 'padauk', 'masterpiece');
+		$fonts = array('mon3', 'pyidaungsu', 'myanmar3', 'notosan', 'padauk', 'masterpiece');
 		$fontFamily = $_POST['fontFamily'];
 		$font_index = array_search($fontFamily, $fonts);
 		if( $font_index > 0) {
 			$font = $fonts[$font_index];
 		} else {
-			$font = 'pyidaungsu';
+			$font = 'mon3';
 		}
 		update_option('fontFamily',			$font);
 	
