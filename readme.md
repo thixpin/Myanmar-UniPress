@@ -16,7 +16,7 @@ Requires at least: 3.0.1
 
 Tested up to: 5.2.2
 
-Stable tag: 1.3.2
+Stable tag: 1.3.3
 
 License: GNU GENERAL PUBLIC LICENSE
 
@@ -54,6 +54,9 @@ Nothing at the moment
 
 
 ## Changelog 
+
+### 1.3.3 
+* Fix letter-spacing
 
 ### 1.3.2
 * Add MUA Office font

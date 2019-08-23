@@ -79,4 +79,5 @@ echo $css;
 
 .myan_mar_Font{
     font-family: MyanmarFont !important;
+    letter-spacing: 0px !important;
 }
