@@ -73,6 +73,7 @@ header("Cache-Control: max-age=$seconds_to_cache");
 header("Content-type: text/css");
 echo $css;
 ?>
+
 .myan_mar_Font{
     font-family: MyanmarFont;
 }
