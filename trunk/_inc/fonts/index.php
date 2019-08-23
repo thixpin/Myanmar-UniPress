@@ -30,6 +30,9 @@ switch ($font) {
     case 'notosan':
         $have_bold=true;
         $font_family="Notosan Myanmar";
+    case 'muaoffice':
+        $have_bold=true;
+        $font_family="MUA Office";
     case 'pyidaungsu':
     default:
         $font = 'pyidaungsu-1.8';

@@ -18,7 +18,7 @@ function unipress_adminpage(){
         update_option('ShareAsZawgyi',0);
 		update_option('unipress_init',1);
 		update_option('DisableConvert2Save',0);
-		update_option('fontFamily','mon3');
+		update_option('fontFamily','muaoffice');
     }
 
     if(	isset($_POST) 
@@ -33,13 +33,13 @@ function unipress_adminpage(){
 		update_option('ShareAsZawgyi',		(int)$_POST['ShareAsZawgyi']);
 		update_option('DisableConvert2Save',(int)$_POST['DisableConvert2Save']);
 
-		$fonts = array('mon3', 'pyidaungsu', 'myanmar3', 'notosan', 'padauk', 'masterpiece');
+		$fonts = array('muaoffice', 'pyidaungsu', 'myanmar3', 'mon3', 'notosan', 'padauk', 'masterpiece');
 		$fontFamily = $_POST['fontFamily'];
 		$font_index = array_search($fontFamily, $fonts);
 		if( $font_index > 0) {
 			$font = $fonts[$font_index];
 		} else {
-			$font = 'mon3';
+			$font = 'muaoffice';
 		}
 		update_option('fontFamily',			$font);
 	
@@ -119,6 +119,7 @@ function unipress_adminpage(){
 					<td>
 						<p>
 						<select class="fontFamily" id="fontFamily" name="fontFamily" group="fontFamily">
+							<option <?php if(get_option('fontFamily') == 'muaoffice'){ echo 'selected="selected"'; } ?> value="muaoffice">MUA Office</option>
 							<option <?php if(get_option('fontFamily') == 'pyidaungsu'){ echo 'selected="selected"'; } ?> value="pyidaungsu">Pyidaungsu</option>
 							<option <?php if(get_option('fontFamily') == 'myanmar3'){ echo 'selected="selected"'; } ?> value="myanmar3">Myanmar3</option>
 							<option <?php if(get_option('fontFamily') == 'mon3'){ echo 'selected="selected"'; } ?> value="mon3">MON3 Anonta 1</option>
