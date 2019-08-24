@@ -1,18 +1,18 @@
 <?php
 /**
  * @package myanmar-unipress
- * @version 1.3.3
+ * @version 1.3.4
  */
 /*
 Plugin Name: Myanmar UniPress
 Plugin URI: http://wordpress.org/extend/plugins/myanmar-unipress/
 Description: Myanmar UniPress will check myanmar content and convert to browser encoding if the content font is not equal to brower font. It use Parabaik Converter, Myanmar Font Tagger Script(by Ko Thant Thet Khin Zaw), ZGDetector of sanlinnaing (for content type checking) and the browser font detecting idea from Ko Ei maung. 
 Author: thixpin
-Version: 1.3.3
+Version: 1.3.4
 Author URI: http://fb.me/thixpin
 */
 
-define( 'UNIP_VERSION', '1.3.3' );
+define( 'UNIP_VERSION', '1.3.4' );
 
 require 'Bunny.php';
 require 'adminpanel.php';

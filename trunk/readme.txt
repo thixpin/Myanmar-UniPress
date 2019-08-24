@@ -1,11 +1,11 @@
 === Myanmar UniPress ===
 Contributors: thixpin
 Email: thixpin@gmail.com
-Tags: Myanmar Font, Myanmar3, Unicode, Zawgyi, Converter, Font Converter
+Tags: Myanmar Font, Myanmar3, Unicode, Zawgyi, Converter, Font Converter, Pyidaungsu, Font Embed
 Requires at least: 3.0.1
 Tested up to: 5.2.2
 Requires PHP: 5.2.4
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,6 +42,9 @@ Nothing at the moment
 
 
 == Changelog ==
+
+= 1.3.4 =
+* Fix letter-spacing in detector
 
 = 1.3.3 =
 * Fix letter-spacing

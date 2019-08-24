@@ -15,7 +15,7 @@
 // Detecting the browser's unicode redering
 function mmFontWidth(text,embedded){
     var e = document.createElement("div");
-    var style = embedded ? "position: absolute; top: -999; font-family: MyanmarFont !important;" : "position: absolute; top: -998;"
+    var style = embedded ? "position: absolute; top: -999; letter-spacing: normal !important; font-family: MyanmarFont !important;" : "position: absolute; top: -998; letter-spacing: normal !important;"
     e.setAttribute("style", style);
     e.innerHTML = text ;
     document.body.appendChild(e);
@@ -196,7 +196,9 @@ function convert_Tree(parent) {
             
             var text = child.textContent.replace(/[\u200b\uFFFD]/g, "");
             var mmText = (text && isMyanmarText(text)) ? true : false;
-
+            if(mmText){
+                add_class(parent,'myan_mar_text');
+            }
             if( mmText && isZawgyiTex(text) && canRender) {
                 
                 child.textContent = Rabbit.zg2uni(text);

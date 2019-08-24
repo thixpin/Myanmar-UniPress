@@ -10,13 +10,13 @@ Myanmar UniPress
 ![License](https://img.shields.io/github/license/thixpin/Myanmar-Unipress.svg)
 ![Scrutinizer code quality (GitHub/Bitbucket)](https://img.shields.io/scrutinizer/quality/g/thixpin/Myanmar-Unipress.svg)
 
-### Tags: myanmar font, Myanmar3, Unicode, Zawgyi, Converter
+### Tags: Myanmar Font, Myanmar3, Unicode, Zawgyi, Converter, Pyidaungsu, Font Embedd
 
 Requires at least: 3.0.1
 
 Tested up to: 5.2.2
 
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 
 License: GNU GENERAL PUBLIC LICENSE
 
@@ -54,6 +54,9 @@ Nothing at the moment
 
 
 ## Changelog 
+
+### 1.3.4
+* Fix letter-spacing in detector
 
 ### 1.3.3 
 * Fix letter-spacing
