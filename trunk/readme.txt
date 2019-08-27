@@ -5,7 +5,7 @@ Tags: Myanmar Font, Myanmar3, Unicode, Zawgyi, Converter, Font Converter, Pyidau
 Requires at least: 3.0.1
 Tested up to: 5.2.2
 Requires PHP: 5.2.4
-Stable tag: 1.3.4
+Stable tag: 1.3.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -42,6 +42,9 @@ Nothing at the moment
 
 
 == Changelog ==
+
+= 1.3.5 =
+* Wait fontLoading to detect the rendering
 
 = 1.3.4 =
 * Fix letter-spacing in detector

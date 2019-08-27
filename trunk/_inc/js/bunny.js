@@ -1,9 +1,12 @@
 (function(){
     //  Disable MUA Web Converter to prevent duplicate converting. 
     var disableMUA = document.createElement("div");
-    disableMUA.setAttribute("style", "display: none");
+    disableMUA.setAttribute("style", "position: absolute; top: -99px; font-family: MyanmarFont !important;"); 
     disableMUA.setAttribute("id", "disableMUA");
     document.body.appendChild(disableMUA);
+
+    // Preloading embedded font
+    disableMUA.innerHTML = "က္က";
 })();
 
 // start code from rabbit
@@ -15,7 +18,7 @@
 // Detecting the browser's unicode redering
 function mmFontWidth(text,embedded){
     var e = document.createElement("div");
-    var style = embedded ? "position: absolute; top: -999; letter-spacing: normal !important; font-family: MyanmarFont !important;" : "position: absolute; top: -998; letter-spacing: normal !important;"
+    var style = embedded ? "position: absolute; top: -99px; letter-spacing: normal !important; font-family: MyanmarFont !important;" : "position: absolute; top: -99px; letter-spacing: normal !important;"
     e.setAttribute("style", style);
     e.innerHTML = text ;
     document.body.appendChild(e);
@@ -30,8 +33,8 @@ function isZawgyiBrowser(){
 function isCanRender(){
     return (mmFontWidth("က္က",true) <= mmFontWidth("က",true) * 1.5 );
 }
-var  zawgyiUser =  isZawgyiBrowser();
-var  canRender = isCanRender();
+var zawgyiUser =  isZawgyiBrowser(),
+    canRender  = true;
 
 //  End of redering detecting 
 
@@ -195,7 +198,7 @@ function convert_Tree(parent) {
         } else if (child.nodeType == Node.TEXT_NODE) {
             
             var text = child.textContent.replace(/[\u200b\uFFFD]/g, "");
-            var mmText = (text && isMyanmarText(text)) ? true : false;
+            var mmText = (text && isMyanmarText(text)) ? true : false;      
             if(mmText){
                 add_class(parent,'myan_mar_text');
             }
@@ -276,21 +279,73 @@ var runObserver = function() {
     }
 }
 
+function checkOS(){
+    var userAgent = navigator.userAgent,
+    platform = window.navigator.platform,
+    macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'],
+    windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'],
+    iosPlatforms = ['iPhone', 'iPad', 'iPod'],
+    os = null;
 
-var title = document.title;
-if (isMyanmarText(title)) {
-    document.title = autoConvert(title);
-}
-
-
-var list = document.querySelector('body');
-if (!list) {
-    if (document.addEventListener) {
-        document.addEventListener("DOMContentLoaded",function(){
-            runObserver();
-        }, false);
+    if (macosPlatforms.indexOf(platform) !== -1) {
+        os = 'Mac OS';
+    } else if (iosPlatforms.indexOf(platform) !== -1) {
+        os = 'iOS';
+    } else if (windowsPlatforms.indexOf(platform) !== -1) {
+        os = 'Windows';
+    } else if (/Android/.test(userAgent)) {
+        os = 'Android';
+    } else if (!os && /Linux/.test(platform)) {
+        os = 'Linux';
     }
-} else {
-    convert_Tree(document.body);
-    runObserver();
+
+    return os;
+
 }
+
+function startBunny(){
+    // document.getElementById("disableMUA").style.fontFamily = 'Pyidaungsu, ' + document.getElementById("disableMUA").style.fontFamily 
+    // console.log(document.getElementById("disableMUA").style.fontFamily);
+    document.getElementById("disableMUA").style.display = 'none';
+
+    canRender = (checkOS() == 'Android') ? true : isCanRender();
+
+    var title = document.title;
+    document.title = isMyanmarText(title)? autoConvert(title) : title;
+    
+    var list = document.querySelector('body');
+    if (!list) {
+        if (document.addEventListener) {
+            document.addEventListener("DOMContentLoaded",function(){
+                runObserver();
+            }, false);
+        }
+    } else {
+        convert_Tree(document.body);
+        runObserver();
+    }
+}
+
+
+function init(){
+
+    var bunnyStarted = false;
+
+    // waiting the font loading to start the bunny
+    document.fonts.ready.then(function () {
+        bunnyStarted = true;
+        startBunny();
+    });
+
+    // if document.fonts is not working  bunny will start after time out
+    setTimeout(function(){
+        if(!bunnyStarted){
+            bunnyStarted = true;
+            startBunny();
+        }
+    },2500);
+
+}
+
+init();
+
